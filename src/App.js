@@ -1,25 +1,38 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
-
+import youtube from './apis/youtube';
+import Searchbar from './Components/Searchbar';
+import Display from './Components/Display.js';
+import DisplayMain from './Components/DisplayMain';
 function App() {
+
+
+  let [videos, setVideos] = useState([]);
+
+  let [choosenvideos, setChoosenVideos] = useState(null);
+
+  console.log(choosenvideos);
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Searchbar setvid={setVideos}></Searchbar>
+
+
+      <div className="videocontainer">
+        <div className="primary-video">
+          <DisplayMain choosenvideos={choosenvideos==null? videos[0]:choosenvideos}></DisplayMain>
+        </div>
+        <div className="rest-videos">
+          <Display videos={videos} setChoosenVideos = {setChoosenVideos}></Display>
+        </div>
+      </div>
+
+    </>
   );
 }
 
 export default App;
+
+
